@@ -112,11 +112,11 @@ public class RegistrationActivity extends Activity implements OnItemSelectedList
 
     private String checkResponse() {
         String strReturn = "";
-        strReturn += (response[0] == "") ? "You need a first name\n" : "";
-        strReturn += (response[1] == "") ? "You need a last name\n" : "";
-        strReturn += (response[2] == "") ? "You need a username\n" : "";
+        strReturn += (response[0].equals("")) ? "You need a first name\n" : "";
+        strReturn += (response[1].equals("")) ? "You need a last name\n" : "";
+        strReturn += (response[2].equals("")) ? "You need a username\n" : "";
         strReturn += (!response[3].equals(response[4])) ? "Your passwords need to match\n" : "";
-        strReturn += (response[4] == "") ? "You need an email\n" : "";
+        strReturn += (response[4].equals("")) ? "You need an email\n" : "";
         return strReturn;
     }
 
@@ -140,7 +140,7 @@ public class RegistrationActivity extends Activity implements OnItemSelectedList
     public void onClickRegister(View view) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "cjdesktop.rh.rit.edu/penpals?";
+        String url = "http://cjdesktop.rh.rit.edu/penpals?";
         fillResponse();
         String popupMessage = checkResponse();
         if (popupMessage.equals("")) {
@@ -163,7 +163,7 @@ public class RegistrationActivity extends Activity implements OnItemSelectedList
                         @Override
                         public void onResponse(String response) {
                             // Display the first 500 characters of the response string.
-                            System.out.println("Response is: " + response.substring(0, 500));
+                            System.out.println("Response is: " + response);
                         }
                     }, new Response.ErrorListener() {
                 @Override
