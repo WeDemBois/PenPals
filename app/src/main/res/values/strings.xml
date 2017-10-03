@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PenPals</string>
+    <string name="title_activity_interest">InterestActivity</string>
+    <string name="firstNameLabel">First Name</string>
+    <string name="editInterestsDisplay">Select your interests below</string>
+    <string name="submitInterestsButtonText">Save changes</string>
+    <string name="cancelInterestsButtonText">Cancel</string>
 </resources>

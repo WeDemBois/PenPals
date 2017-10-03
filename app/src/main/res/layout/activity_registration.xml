@@ -169,7 +169,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:gravity="fill_vertical|fill_horizontal"
-        android:text="First Name"
+        android:text="@string/firstNameLabel"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"

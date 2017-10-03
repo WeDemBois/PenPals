@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Intent newActivity = new Intent(this, RegistrationActivity.class);
+        Intent newActivity = new Intent(this, InterestActivity.class);
         newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(newActivity);
         finish();

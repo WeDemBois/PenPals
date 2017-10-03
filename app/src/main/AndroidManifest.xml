@@ -22,7 +22,10 @@
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".MainPageActivity" />
         <activity android:name=".ViewProfileActivity" />
-        <activity android:name=".EditProfileActivity"></activity>
+        <activity android:name=".EditProfileActivity" />
+        <activity
+            android:name=".InterestActivity"
+            android:label="@string/title_activity_interest"></activity>
     </application>
 
 </manifest>
