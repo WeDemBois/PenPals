@@ -35,9 +35,8 @@ import static com.github.wedemboys.penpals.R.id.*;
 public class RegistrationActivity extends Activity implements OnItemSelectedListener {
 
     private ArrayList<Spinner> spinners = new ArrayList<Spinner>();
-    private static final ArrayList<String[]> options = new ArrayList<String[]>();
+    protected static final ArrayList<String[]> options = new ArrayList<String[]>();
     private String[] response = new String[9];
-    public static String submitMessage;
     private EditText[] textBoxes = new EditText[6];
 
     private PopupWindow popup;
