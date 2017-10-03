@@ -1,7 +1,7 @@
 package com.github.wedemboys.penpals;
 
 import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -112,11 +112,12 @@ public class RegistrationActivity extends Activity implements OnItemSelectedList
 
     private String checkResponse() {
         String strReturn = "";
-        strReturn += (response[0].equals("")) ? "You need a first name\n" : "";
-        strReturn += (response[1].equals("")) ? "You need a last name\n" : "";
-        strReturn += (response[2].equals("")) ? "You need a username\n" : "";
-        strReturn += (!response[3].equals(response[4])) ? "Your passwords need to match\n" : "";
-        strReturn += (response[4].equals("")) ? "You need an email\n" : "";
+        strReturn += (response[0].equals("")) ? "You need a first name\n\n" : "";
+        strReturn += (response[1].equals("")) ? "You need a last name\n\n" : "";
+        strReturn += (response[2].equals("")) ? "You need a username\n\n" : "";
+        strReturn += (!response[3].equals(response[4])) ? "Your passwords need to match\n\n" :
+                ((response[3].equals("")) ? "You need a password\n\n" : "");
+        strReturn += (response[4].equals("")) ? "You need an email\n\n" : "";
         return strReturn;
     }
 
@@ -164,6 +165,12 @@ public class RegistrationActivity extends Activity implements OnItemSelectedList
                         public void onResponse(String response) {
                             // Display the first 500 characters of the response string.
                             System.out.println("Response is: " + response);
+                            if (!response.equals("success")){
+                                popup(response);
+                            } else {
+                                //go to the main activity
+                                goToMainPage();
+                            }
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -174,26 +181,37 @@ public class RegistrationActivity extends Activity implements OnItemSelectedList
             // Add the request to the RequestQueue.
             queue.add(stringRequest);
         } else {
-            layoutInflater = (LayoutInflater)
-                    getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-            ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.popup, null);
-
-            int popupWidth = 400;
-            int popupHeight = 400;
-            popup = new PopupWindow(container, popupWidth, popupHeight, true);
-            ((TextView) popup.getContentView().findViewById(R.id.textViewPopup))
-                    .setText(popupMessage);
-            int x = (getScreenWidth() - popupWidth) / 2;
-            int y = (getScreenHeight() - popupHeight) / 2;
-            popup.showAtLocation(constraintLayout, Gravity.NO_GRAVITY, x, y);
-            container.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    popup.dismiss();
-                    return true;
-                }
-            });
+            popup(popupMessage);
         }
+    }
+
+    private void popup(String message){
+        layoutInflater = (LayoutInflater)
+                getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+        ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.popup, null);
+
+        int popupWidth = 400;
+        int popupHeight = 400;
+        popup = new PopupWindow(container, popupWidth, popupHeight, true);
+        ((TextView) popup.getContentView().findViewById(R.id.textViewPopup))
+                .setText(message);
+        int x = (getScreenWidth() - popupWidth) / 2;
+        int y = (getScreenHeight() - popupHeight) / 2;
+        popup.showAtLocation(constraintLayout, Gravity.NO_GRAVITY, x, y);
+        container.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                popup.dismiss();
+                return true;
+            }
+        });
+    }
+
+    private void goToMainPage(){
+        Intent newActivity = new Intent(this, MainPageActivity.class);
+        newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(newActivity);
+        finish();
     }
 
 }

@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/registerConstraint"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_centerHorizontal="false"
     android:layout_centerVertical="false"
     android:fadeScrollbars="true"
@@ -333,13 +333,16 @@
         android:id="@+id/registerButton"
         android:layout_width="130dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="-5dp"
+        android:layout_marginBottom="5dp"
         android:background="@android:color/holo_red_dark"
         android:gravity="fill_vertical|fill_horizontal"
         android:onClick="onClickRegister"
         android:text="Register"
         android:textAlignment="center"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
