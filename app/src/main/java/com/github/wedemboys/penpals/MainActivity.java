@@ -19,13 +19,19 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
-
-        Intent newActivity = new Intent(this, RegistrationActivity.class);
-        newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(newActivity);
-        finish();
+        String username = sharedPreferences.getString("username", "");
+        if (username.equals("")) {
+            Intent newActivity = new Intent(this, RegistrationActivity.class);
+            newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(newActivity);
+            finish();
+        } else {
+            Intent newActivity = new Intent(this, MainPageActivity.class);
+            newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(newActivity);
+            finish();
+        }
     }
-
 }
 
 

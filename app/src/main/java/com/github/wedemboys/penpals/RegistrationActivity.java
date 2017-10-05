@@ -1,7 +1,9 @@
 package com.github.wedemboys.penpals;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -143,6 +145,7 @@ public class RegistrationActivity extends Activity implements OnItemSelectedList
         String url = "http://cjdesktop.rh.rit.edu/penpals?";
         fillResponse();
         String popupMessage = checkResponse();
+        final String username = response[2];
         if (popupMessage.equals("")) {
             url += "action=register";
             url += ("&username=" + response[2]);
@@ -168,6 +171,10 @@ public class RegistrationActivity extends Activity implements OnItemSelectedList
                                 popup(response);
                             } else {
                                 //go to the main activity
+                                SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString(Constants.USERNAME_KEY, username);
+                                editor.commit();
                                 goToMainPage();
                             }
                         }
