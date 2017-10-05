@@ -15,4 +15,14 @@
         android:layout_alignParentTop="true"
         android:onClick="goToViewProfile"
         android:text="View Profile" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:onClick="goToNewChat"
+        android:text="@string/newChatButtonText" />
 </RelativeLayout>

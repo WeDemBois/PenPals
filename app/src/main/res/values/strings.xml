@@ -6,4 +6,10 @@
     <string name="submitInterestsButtonText">Save changes</string>
     <string name="cancelInterestsButtonText">Cancel</string>
     <string name="title_activity_new_chat">NewChatActivity</string>
+    <string name="newChatTitleText">Create a New Chat</string>
+    <string name="newChatToDefaultText">Recipients</string>
+    <string name="createChatButtonText">Create Chat</string>
+    <string name="newChatButtonText">New Chat</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="appTitle">PenPals</string>
 </resources>
