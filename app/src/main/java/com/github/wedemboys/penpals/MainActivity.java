@@ -1,6 +1,8 @@
 package com.github.wedemboys.penpals;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.content.Intent;
 
@@ -16,7 +18,9 @@ public class MainActivity extends Activity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Intent newActivity = new Intent(this, InterestActivity.class);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+
+        Intent newActivity = new Intent(this, RegistrationActivity.class);
         newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(newActivity);
         finish();

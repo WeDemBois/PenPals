@@ -5,4 +5,5 @@
     <string name="editInterestsDisplay">Select your interests below</string>
     <string name="submitInterestsButtonText">Save changes</string>
     <string name="cancelInterestsButtonText">Cancel</string>
+    <string name="title_activity_new_chat">NewChatActivity</string>
 </resources>

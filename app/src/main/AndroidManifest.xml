@@ -25,7 +25,10 @@
         <activity android:name=".EditProfileActivity" />
         <activity
             android:name=".InterestActivity"
-            android:label="@string/title_activity_interest"></activity>
+            android:label="@string/title_activity_interest" />
+        <activity
+            android:name=".NewChatActivity"
+            android:label="@string/title_activity_new_chat"></activity>
     </application>
 
 </manifest>
