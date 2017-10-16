@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 public class MainPageActivity extends Activity {
 
@@ -29,6 +30,16 @@ public class MainPageActivity extends Activity {
         Intent newActivity = new Intent(this, NewChatActivity.class);
         newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         newActivity.putExtra(Constants.USER_INTENT_KEY, getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE).getString(Constants.USERNAME_KEY, ""));
+        startActivity(newActivity);
+    }
+
+    public void logout(View view) {
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Constants.USERNAME_KEY, "");
+        editor.commit();
+        Intent newActivity = new Intent(this, MainActivity.class);
+        newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(newActivity);
     }
 }

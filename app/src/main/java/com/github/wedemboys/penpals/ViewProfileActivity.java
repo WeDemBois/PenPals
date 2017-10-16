@@ -37,7 +37,7 @@ public class ViewProfileActivity extends Activity {
         currentUsername = sharedPreferences.getString("username", "");
 
         this.username = getIntent().getStringExtra(Constants.USERNAME_INTENT_EXTRA_KEY);
-        this.editButton = (Button)findViewById(editProfile);
+        this.editButton = (Button) findViewById(editProfile);
 
         editButton.setVisibility((username.equals(currentUsername) ? View.VISIBLE : View.GONE));
 
@@ -48,14 +48,14 @@ public class ViewProfileActivity extends Activity {
         fillText();
     }
 
-    private void fillText(){
+    private void fillText() {
         ((TextView) findViewById(R.id.viewProfileUsername)).setText(display[0]);
         ((TextView) findViewById(R.id.viewProfileName)).setText(display[1]);
         ((TextView) findViewById(R.id.viewProfileCountry)).setText(display[2]);
         ((TextView) findViewById(R.id.viewProfileLanguage)).setText(display[3]);
     }
 
-    private void getUser(){
+    private void getUser() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://cjdesktop.rh.rit.edu/penpals?action=retrieveinfo&username=" + username;
         // Request a string response from the provided URL.
@@ -63,7 +63,8 @@ public class ViewProfileActivity extends Activity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        User user = gson.fromJson(response, User.class);
+
+                        User user = ViewProfileActivity.gson.fromJson(response, User.class);
                         ViewProfileActivity.display[0] = user.getUsername();
                         ViewProfileActivity.display[1] = user.getFirstname() + " " + user.getLastname();
                         ViewProfileActivity.display[2] = user.getCountry();
@@ -79,21 +80,21 @@ public class ViewProfileActivity extends Activity {
         queue.add(stringRequest);
     }
 
-    public void goToEditProfile(View view){
+    public void goToEditProfile(View view) {
         Intent newActivity = new Intent(this, EditProfileActivity.class);
         newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(newActivity);
         finish();
     }
 
-    public void goToMainPageActivity(){
+    public void goToMainPageActivity() {
         Intent newActivity = new Intent(this, MainPageActivity.class);
         newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(newActivity);
         finish();
     }
 
-    public void goToInterestActivity(View view){
+    public void goToInterestActivity(View view) {
         Intent newActivity = new Intent(this, InterestActivity.class);
         newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(newActivity);
