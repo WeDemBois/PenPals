@@ -14,4 +14,5 @@
     <string name="appTitle">PenPals</string>
     <string name="loginText">Login</string>
     <string name="loginError">Username or password not recognized</string>
+    <string name="title_activity_chat">ChatActivity</string>
 </resources>

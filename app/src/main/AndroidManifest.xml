@@ -31,7 +31,10 @@
             android:label="@string/title_activity_new_chat" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".ChatActivity"
+            android:label="@string/title_activity_chat"></activity>
     </application>
 
 </manifest>
