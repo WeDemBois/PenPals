@@ -32,6 +32,7 @@ public class ChatActivity extends Activity {
         chatText = (EditText) findViewById(R.id.chatViewChatText);
 
         //set name in title bar
+        System.out.println(findViewById(R.id.chatUserName));
         ((TextView) findViewById(R.id.chatUserName)).setText(withUser);
 
         //load previous chats

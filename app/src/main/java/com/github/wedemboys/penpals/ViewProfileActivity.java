@@ -26,18 +26,18 @@ public class ViewProfileActivity extends Activity {
     private String username;
     private String currentUsername;
     private Button editButton;
-    public static String[] display;
+    public String[] display;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_profile);
+        View view = getLayoutInflater().inflate(R.layout.activity_view_profile, null);
 
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
         currentUsername = sharedPreferences.getString("username", "");
 
         this.username = getIntent().getStringExtra(Constants.USERNAME_INTENT_EXTRA_KEY);
-        this.editButton = (Button) findViewById(editProfile);
+        this.editButton = (Button) view.findViewById(editProfile);
 
         editButton.setVisibility((username.equals(currentUsername) ? View.VISIBLE : View.GONE));
 
@@ -45,7 +45,7 @@ public class ViewProfileActivity extends Activity {
         display = new String[4];
 
         getUser();
-        fillText();
+        setContentView(view);
     }
 
     private void fillText() {
@@ -63,12 +63,14 @@ public class ViewProfileActivity extends Activity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        System.out.println(response);
                         User user = ViewProfileActivity.gson.fromJson(response, User.class);
-                        ViewProfileActivity.display[0] = user.getUsername();
-                        ViewProfileActivity.display[1] = user.getFirstname() + " " + user.getLastname();
-                        ViewProfileActivity.display[2] = user.getCountry();
-                        ViewProfileActivity.display[3] = user.getLang();
+                        System.out.println(user);
+                        display[0] = user.getUsername();
+                        display[1] = user.getFirstname() + " " + user.getLastname();
+                        display[2] = user.getCountry();
+                        display[3] = user.getLang();
+                        fillText();
                     }
                 }, new Response.ErrorListener() {
             @Override
