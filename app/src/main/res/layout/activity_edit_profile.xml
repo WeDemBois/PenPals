@@ -34,14 +34,14 @@
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:text="Cancel"
-        android:textSize="20sp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp" />
+        android:text="Cancel"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textView14"
@@ -105,7 +105,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
-        android:text="Interests (TODO)"
+        android:text="Interests"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
@@ -143,8 +143,16 @@
         android:id="@+id/editLanguageSpinner"
         android:layout_width="216dp"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_alignTop="@+id/textView17"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <com.github.wedemboys.penpals.MultiSpinner
+        android:id="@+id/interestSpinner"
+        android:layout_width="216dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textView18" />
 
 </RelativeLayout>

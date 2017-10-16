@@ -18,6 +18,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 import static com.github.wedemboys.penpals.R.id.countrySpinner;
 import static com.github.wedemboys.penpals.R.id.editCountrySpinner;
 import static com.github.wedemboys.penpals.R.id.editLanguageSpinner;
@@ -27,6 +33,7 @@ public class EditProfileActivity extends Activity implements AdapterView.OnItemS
 
     private Spinner[] spinners = new Spinner[2];
     private EditText[] textBoxes = new EditText[2];
+    private MultiSpinner interestSpinner = new MultiSpinner(this);
     private String[] changes = new String[4];
     private Gson gson = new Gson();
     private Button applyChanges;
@@ -42,6 +49,8 @@ public class EditProfileActivity extends Activity implements AdapterView.OnItemS
 
         textBoxes[0] = ((EditText) findViewById(R.id.editText)); //firstname
         textBoxes[1] = ((EditText) findViewById(R.id.editText2)); //lastname
+
+        interestSpinner.setItems(readInterests());
 
         for (int i = 0; i < spinners.length; i++) {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditProfileActivity.this,
@@ -105,6 +114,21 @@ public class EditProfileActivity extends Activity implements AdapterView.OnItemS
         changes[3] = ((Spinner)(findViewById(R.id.editLanguageSpinner))).getSelectedItem().toString();
     }
 
-
+    public String[] readInterests(){
+        String file = "interests.txt";
+        ArrayList<String> interests = new ArrayList<String>();
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+            String line;
+            while ((line = br.readLine()) != null) {
+                interests.add(line);
+            }
+            br.close();
+        } catch (IOException e) {
+            System.out.println("ERROR: unable to read file " + file);
+            e.printStackTrace();
+        }
+        return (String[])interests.toArray();
+    }
 
 }

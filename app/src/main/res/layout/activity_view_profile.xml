@@ -14,6 +14,68 @@
         android:layout_marginTop="16dp"
         android:onClick="goToEditProfile"
         android:text="Edit"
+        android:visibility="visible"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/viewProfileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="This Shouldn't Ever Display"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/viewProfileUsername"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/viewProfileUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This Shouldn't Ever Display"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/editProfile"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/viewProfileCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/viewProfileName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:text="This Shouldn't Ever Display"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/viewProfileLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This Shouldn't Ever Display"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/viewProfileCountry"
+        android:layout_alignLeft="@+id/viewProfileCountry"
+        android:layout_alignStart="@+id/viewProfileCountry"
+        android:layout_marginTop="35dp" />
+
+    <Button
+        android:id="@+id/viewProfileInterests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/viewProfileLanguage"
+        android:layout_alignLeft="@+id/viewProfileLanguage"
+        android:layout_alignRight="@+id/viewProfileLanguage"
+        android:layout_alignStart="@+id/viewProfileLanguage"
+        android:layout_below="@+id/viewProfileLanguage"
+        android:layout_marginTop="35dp"
+        android:text="View Interests" />
 </RelativeLayout>
