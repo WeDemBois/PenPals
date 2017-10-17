@@ -23,6 +23,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static com.github.wedemboys.penpals.R.id.countrySpinner;
 import static com.github.wedemboys.penpals.R.id.editCountrySpinner;
@@ -33,7 +34,7 @@ public class EditProfileActivity extends Activity implements AdapterView.OnItemS
 
     private Spinner[] spinners = new Spinner[2];
     private EditText[] textBoxes = new EditText[2];
-    private MultiSpinner interestSpinner = new MultiSpinner(this);
+    private MultiSpinner interestSpinner;
     private String[] changes = new String[4];
     private Gson gson = new Gson();
     private Button applyChanges;
@@ -44,12 +45,16 @@ public class EditProfileActivity extends Activity implements AdapterView.OnItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
+        interestSpinner = (MultiSpinner) findViewById(R.id.interestSpinner);
+
         spinners[0] = ((Spinner) findViewById(editCountrySpinner));
         spinners[1] = ((Spinner) findViewById(editLanguageSpinner));
 
         textBoxes[0] = ((EditText) findViewById(R.id.editText)); //firstname
         textBoxes[1] = ((EditText) findViewById(R.id.editText2)); //lastname
 
+        String[] array = readInterests();
+        System.out.println(array);
         interestSpinner.setItems(readInterests());
 
         for (int i = 0; i < spinners.length; i++) {
@@ -115,20 +120,12 @@ public class EditProfileActivity extends Activity implements AdapterView.OnItemS
     }
 
     public String[] readInterests(){
-        String file = "interests.txt";
         ArrayList<String> interests = new ArrayList<String>();
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-            String line;
-            while ((line = br.readLine()) != null) {
-                interests.add(line);
-            }
-            br.close();
-        } catch (IOException e) {
-            System.out.println("ERROR: unable to read file " + file);
-            e.printStackTrace();
+        Scanner scanner = new Scanner(getResources().openRawResource(R.raw.interests));
+        while (scanner.hasNext()) {
+            interests.add(scanner.nextLine());
         }
-        return (String[])interests.toArray();
+        return interests.toArray(new String[interests.size()]);
     }
 
 }

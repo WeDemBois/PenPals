@@ -153,6 +153,7 @@
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/textView18" />
+        android:layout_alignTop="@+id/textView18"
+        android:spinnerMode="dialog" />
 
 </RelativeLayout>
