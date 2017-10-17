@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.content.Intent;
+import android.view.View;
 
 public class MainActivity extends Activity {
 
@@ -13,25 +14,22 @@ public class MainActivity extends Activity {
 //        setTheme(android.R.style.Theme_NoTitleBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", "");
-        if (username.equals("")) {
-            Intent newActivity = new Intent(this, RegistrationActivity.class);
-            newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(newActivity);
-            finish();
-        } else {
-            Intent newActivity = new Intent(this, MainPageActivity.class);
-            newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(newActivity);
-            finish();
-        }
     }
+
+    public void goToRegister(View view){
+        Intent newActivity = new Intent(this, RegistrationActivity.class);
+        newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(newActivity);
+        finish();
+    }
+
+    public void goToLogin(View view){
+        Intent newActivity = new Intent(this, LoginActivity.class);
+        newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(newActivity);
+        finish();
+    }
+
 }
 
 

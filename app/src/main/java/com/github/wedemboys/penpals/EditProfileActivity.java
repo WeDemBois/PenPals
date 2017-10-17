@@ -1,6 +1,9 @@
 package com.github.wedemboys.penpals;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,8 +24,10 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static com.github.wedemboys.penpals.R.id.countrySpinner;
@@ -39,6 +44,7 @@ public class EditProfileActivity extends Activity implements AdapterView.OnItemS
     private Gson gson = new Gson();
     private Button applyChanges;
     public User user;
+    public ArrayList<String[]> options = new ArrayList<String[]>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +63,25 @@ public class EditProfileActivity extends Activity implements AdapterView.OnItemS
         System.out.println(array);
         interestSpinner.setItems(readInterests());
 
+        InputStream countriesInputStream = getResources().openRawResource(R.raw.countries);
+        ReadCSVFile countries = new ReadCSVFile(countriesInputStream);
+        List countryOptions = countries.read();
+        String[] strArrCountries = new String[(countryOptions.size() / 2) + 1];
+        strArrCountries[0] = ((String[]) (countryOptions.get(0)))[0].substring(2);
+        for (int i = 2; i < countryOptions.size(); i += 2) {
+            strArrCountries[i / 2] = ((String[]) (countryOptions.get(i)))[0];
+        }
+        options.add(strArrCountries);
+
+        String[] languageOptions = {"English"};
+        options.add(languageOptions);
+
+        String[] genderOptions = {"Male", "Female", "Other"};
+        options.add(genderOptions);
+
         for (int i = 0; i < spinners.length; i++) {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditProfileActivity.this,
-                    android.R.layout.simple_spinner_item, RegistrationActivity.options.get(i));
+                    android.R.layout.simple_spinner_item, options.get(i));
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinners[i].setAdapter(adapter);
             spinners[i].setOnItemSelectedListener(this);
@@ -70,7 +92,9 @@ public class EditProfileActivity extends Activity implements AdapterView.OnItemS
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         fillChanges();
-        user = new User("tester", "jd1984", "johndoe@test.com", changes[0], changes[1], changes[2], changes[3], "male", "");
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
+        user = new User(username, "", "", changes[0], changes[1], changes[2], changes[3], "", "");
         String json = gson.toJson(user);
 
         String url = "http://cjdesktop.rh.rit.edu/penpals?action=changeinfo&user=" + json;
@@ -90,6 +114,7 @@ public class EditProfileActivity extends Activity implements AdapterView.OnItemS
         });
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
+        goToMainPage();
 
     }
     //when APPLY CHANGES is clicked
@@ -126,6 +151,12 @@ public class EditProfileActivity extends Activity implements AdapterView.OnItemS
             interests.add(scanner.nextLine());
         }
         return interests.toArray(new String[interests.size()]);
+    }
+
+    public void goToMainPage() {
+        Intent newActivity = new Intent(this, MainPageActivity.class);
+        newActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(newActivity);
     }
 
 }

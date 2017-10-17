@@ -113,23 +113,23 @@
         android:id="@+id/editText"
         android:layout_width="216dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:layout_alignTop="@+id/textView13"
         android:layout_alignLeft="@+id/editText2"
-        android:layout_alignStart="@+id/editText2" />
+        android:layout_alignStart="@+id/editText2"
+        android:layout_alignTop="@+id/textView13"
+        android:ems="10"
+        android:hint="First Name"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editText2"
         android:layout_width="216dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:layout_alignTop="@+id/textView15"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignTop="@+id/textView15"
+        android:ems="10"
+        android:hint="Last Name"
+        android:inputType="textPersonName" />
 
     <Spinner
         android:id="@+id/editCountrySpinner"
