@@ -1,5 +1,7 @@
 package com.github.wedemboys.penpals;
 
+import android.app.IntentService;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
@@ -28,30 +30,30 @@ public class ChatActivity extends Activity {
         super.onCreate(savedInstanceState);
         View view = getLayoutInflater().inflate(R.layout.activity_chat, null);
 
-        withUser = getIntent().getStringExtra(Constants.USER_INTENT_KEY);
+//        withUser = getIntent().getStringExtra(Constants.USER_INTENT_KEY);
         chatText = (EditText) findViewById(R.id.chatViewChatText);
-
-        //set name in title bar
-        System.out.println(findViewById(R.id.chatUserName));
-        ((TextView) findViewById(R.id.chatUserName)).setText(withUser);
-
-        //load previous chats
-        File previousChats = new File(getFilesDir(), Constants.STORED_CHATS_FILE_PREFIX + withUser);
-        try {
-            Scanner scanner = new Scanner(previousChats);
-            Gson gson = new Gson();
-            while(scanner.hasNext()) {
-                String chatJson = scanner.nextLine();
-                Message chat = gson.fromJson(chatJson, Message.class);
-                if (chat.getSender().equals(withUser)) {
-                    //initialize chats on left side (received)
-                } else {
-                    //initialize chats on right side (sent)
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+//
+//        //set name in title bar
+//        System.out.println(findViewById(R.id.chatUserName));
+//        ((TextView) findViewById(R.id.chatUserName)).setText(withUser);
+//
+//        //load previous chats
+//        File previousChats = new File(getFilesDir(), Constants.STORED_CHATS_FILE_PREFIX + withUser);
+//        try {
+//            Scanner scanner = new Scanner(previousChats);
+//            Gson gson = new Gson();
+//            while(scanner.hasNext()) {
+//                String chatJson = scanner.nextLine();
+//                Message chat = gson.fromJson(chatJson, Message.class);
+//                if (chat.getSender().equals(withUser)) {
+//                    //initialize chats on left side (received)
+//                } else {
+//                    //initialize chats on right side (sent)
+//                }
+//            }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
         setContentView(view);
     }
@@ -84,5 +86,11 @@ public class ChatActivity extends Activity {
         });
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
+    }
+
+    public void goToMainPage(View view) {
+        Intent intent = new Intent(this, MainPageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

@@ -30,13 +30,15 @@ public class MainPageActivity extends Activity {
         String username = sharedPreferences.getString("username", "");
 
         String url = "http://cjdesktop.rh.rit.edu/penpals?action=retrievemessage&username=" + username;
-        final String[] json = {""};
+
+        final Gson gson = new Gson();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        json[0] = response;
+                        Message message = gson.fromJson(response, Message.class);
+                        System.out.println(message.getContent());
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -46,11 +48,6 @@ public class MainPageActivity extends Activity {
         });
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
-        Gson gson = new Gson();
-
-        while (!json[0].equals("")) {
-            Message mesage = gson.fromJson(json[0], Message.class);
-        }
         setContentView(R.layout.activity_main_page);
     }
 
@@ -78,5 +75,11 @@ public class MainPageActivity extends Activity {
         Intent newActivity = new Intent(this, MainActivity.class);
         newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(newActivity);
+    }
+
+    public void goToChat(View view) {
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
