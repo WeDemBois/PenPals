@@ -114,7 +114,7 @@ public class EditProfileActivity extends Activity implements AdapterView.OnItemS
         });
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
-        goToMainPage();
+        goToMainPage(null);
 
     }
     //when APPLY CHANGES is clicked
@@ -153,7 +153,7 @@ public class EditProfileActivity extends Activity implements AdapterView.OnItemS
         return interests.toArray(new String[interests.size()]);
     }
 
-    public void goToMainPage() {
+    public void goToMainPage(View view) {
         Intent newActivity = new Intent(this, MainPageActivity.class);
         newActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(newActivity);
