@@ -26,13 +26,15 @@
             android:id="@+id/newChatRecipients"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/createNewChatTitle"
             android:layout_marginTop="23dp"
             android:ems="10"
+            android:hint="Recipients"
             android:inputType="textPersonName"
-            android:text="@string/newChatToDefaultText"
             android:textAlignment="center"
             android:textAllCaps="false"
             tools:layout_editor_absoluteX="8dp"
@@ -61,6 +63,71 @@
             android:layout_alignParentStart="true"
             android:ems="10"
             android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:onClick="goBack"
+            android:text="Back" />
+
+        <CheckBox
+            android:id="@+id/randomCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/newChatRecipients"
+            android:onClick="onRandomChanged"
+            android:text="Random?" />
+
+        <CheckBox
+            android:id="@+id/interestCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/randomCheckbox"
+            android:text="Interest Based"
+            android:visibility="invisible" />
+
+        <CheckBox
+            android:id="@+id/languageCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/interestCheckbox"
+            android:text="Language Based"
+            android:visibility="invisible" />
+
+        <CheckBox
+            android:id="@+id/groupCheckbox"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:onClick="onGroupChanged"
+            android:text="Group"
+            android:layout_below="@+id/newChatRecipients"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:id="@+id/groupSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Size"
+            android:inputType="textPersonName"
+            android:visibility="invisible"
+            android:layout_alignBaseline="@+id/interestCheckbox"
+            android:layout_alignBottom="@+id/interestCheckbox"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignLeft="@+id/groupCheckbox"
+            android:layout_alignStart="@+id/groupCheckbox" />
 
     </RelativeLayout>
 
