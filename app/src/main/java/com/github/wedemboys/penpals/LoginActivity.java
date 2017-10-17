@@ -33,8 +33,11 @@ public class LoginActivity extends Activity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://cjdesktop.rh.rit.edu/penpals?";
 
+        final String username = ((EditText) findViewById(R.id.loginUsername)).getText().toString();
+        System.out.println(username);
+
         url += "action=login";
-        url += "&username=" + ((EditText) findViewById(R.id.loginUsername)).getText().toString();
+        url += "&username=" + username;
         url += "&password=" + ((EditText) findViewById(R.id.loginPassword)).getText().toString();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -48,7 +51,7 @@ public class LoginActivity extends Activity {
                         } else {
                             SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString(Constants.USERNAME_KEY, ((EditText) findViewById(R.id.loginUsername)).getText().toString());
+                            editor.putString(Constants.USERNAME_KEY, username);
                             editor.commit();
                             goToMainPage();
                         }
@@ -67,5 +70,11 @@ public class LoginActivity extends Activity {
         Intent newActivity = new Intent(this, MainPageActivity.class);
         newActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(newActivity);
+    }
+
+    public void goToRegister(View view) {
+        Intent intent = new Intent(this, RegistrationActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
