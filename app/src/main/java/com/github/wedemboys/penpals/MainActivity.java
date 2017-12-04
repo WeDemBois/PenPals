@@ -16,6 +16,10 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     public void goToRegister(View view){
         Intent newActivity = new Intent(this, RegistrationActivity.class);
         newActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -51,6 +51,10 @@ public class MainPageActivity extends Activity {
         setContentView(R.layout.activity_main_page);
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     public void goToViewProfile(View view){
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
         String username = sharedPreferences.getString(Constants.USERNAME_KEY, "");
