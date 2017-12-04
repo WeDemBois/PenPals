@@ -31,6 +31,8 @@ import com.android.volley.toolbox.Volley;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.github.wedemboys.penpals.R.id.*;
 
@@ -118,7 +120,7 @@ public class RegistrationActivity extends Activity implements OnItemSelectedList
         strReturn += (response[2].equals("")) ? "You need a username\n\n" : "";
         strReturn += (!response[3].equals(response[4])) ? "Your passwords need to match\n\n" :
                 ((response[3].equals("")) ? "You need a password\n\n" : "");
-        strReturn += (response[4].equals("")) ? "You need an email\n\n" : "";
+        strReturn += checkValidEmail(response[5]);
         return strReturn;
     }
 
@@ -211,6 +213,12 @@ public class RegistrationActivity extends Activity implements OnItemSelectedList
                 return true;
             }
         });
+    }
+
+    private String checkValidEmail(String email){
+        if (email.length() == 0) return "You need an email";
+        Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+        return (pattern.matcher(email).matches()) ? "" : "You need a valid email";
     }
 
     private void goToMainPage(){
