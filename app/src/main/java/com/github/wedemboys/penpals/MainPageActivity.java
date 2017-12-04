@@ -7,7 +7,9 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,6 +25,8 @@ public class MainPageActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = getLayoutInflater().inflate(R.layout.activity_main_page, null);
+        final LinearLayout ll = (LinearLayout) view.findViewById(R.id.messagesLinearLayout);
+        System.out.println(ll);
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -37,8 +41,22 @@ public class MainPageActivity extends Activity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Message message = gson.fromJson(response, Message.class);
-                        System.out.println(message.getContent());
+                        final Message message = gson.fromJson(response, Message.class);
+                        if (message != null && message.getSender() != null && message.getSender().length() > 0) {
+                            Button button = new Button(MainPageActivity.this.getBaseContext());
+                            button.setText(message.getSender());
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(MainPageActivity.this, ChatActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    intent.putExtra(Constants.USER_INTENT_KEY, message.getSender());
+                                    intent.putExtra(Constants.MESSAGE_CONTENT, message.getContent());
+                                    startActivity(intent);
+                                }
+                            });
+                            ll.addView(button);
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -48,7 +66,7 @@ public class MainPageActivity extends Activity {
         });
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
-        setContentView(R.layout.activity_main_page);
+        setContentView(view);
     }
 
     @Override

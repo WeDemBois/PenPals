@@ -36,6 +36,7 @@
         android:text="Logout" />
 
     <LinearLayout
+        android:id="@+id/messagesLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
@@ -43,15 +44,5 @@
         android:layout_below="@+id/viewProfileButton"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/testChatScreen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:onClick="goToChat"
-            android:padding="25sp"
-            android:text="Jake O'Donnel"
-            android:textAlignment="center"
-            android:textSize="24sp" />
     </LinearLayout>
 </RelativeLayout>

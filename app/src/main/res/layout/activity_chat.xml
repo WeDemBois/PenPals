@@ -26,7 +26,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="Jake O'Donnel"
         android:textAlignment="center"
         android:textSize="30sp"
         tools:layout_editor_absoluteX="8dp"
@@ -52,78 +51,20 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:onClick="sendChat"
         android:text="Send"
         android:textSize="24sp" />
 
     <LinearLayout
+        android:id="@+id/chatLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/chatViewChatText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/chatViewBackButton"
-        android:background="@android:color/black"
+        android:background="@android:color/background_dark"
         android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/editText9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/black"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="25dp"
-            android:text="Why, Hello There!"
-            android:textColor="@android:color/white" />
-
-        <EditText
-            android:id="@+id/editText10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/black"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:text="Hello, new friend!"
-            android:textAlignment="textEnd"
-            android:textColor="@android:color/white" />
-
-        <EditText
-            android:id="@+id/editText11"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/black"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:text="How are you doing on this fine day?"
-            android:textColor="@android:color/white" />
-
-        <EditText
-            android:id="@+id/editText12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/black"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:text="I am doing most excellently"
-            android:textAlignment="textEnd"
-            android:textColor="@android:color/white" />
-
-        <EditText
-            android:id="@+id/editText13"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/black"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:text="And yourself?"
-            android:textAlignment="textEnd"
-            android:textColor="@android:color/white" />
 
     </LinearLayout>
 

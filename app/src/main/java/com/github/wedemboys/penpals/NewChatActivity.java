@@ -46,7 +46,7 @@ public class NewChatActivity extends Activity {
         RequestQueue queue = Volley.newRequestQueue(this);
 
         Gson gson = new Gson();
-        Message message = new Message(getIntent().getStringExtra(Constants.USER_INTENT_KEY), to, content);
+        final Message message = new Message(getIntent().getStringExtra(Constants.USER_INTENT_KEY), to, content);
         String messageJson = gson.toJson(message);
         System.out.println(messageJson);
         String url = "http://cjdesktop.rh.rit.edu/penpals?action=sendmessage&message=" + messageJson;
@@ -58,7 +58,7 @@ public class NewChatActivity extends Activity {
                         // Display the first 500 characters of the response string.
                         System.out.println("Response is: " + response);
                         if (!response.equals("success")){
-                            goToChats();
+                            goToChats(message);
                         } else {
                         }
                     }
@@ -72,10 +72,11 @@ public class NewChatActivity extends Activity {
         queue.add(stringRequest);
     }
 
-    private void goToChats() {
+    private void goToChats(Message message) {
         Intent intent = new Intent(this, ChatActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
+        intent.putExtra(Constants.USER_INTENT_KEY, message.getRecipient());
+        intent.putExtra(Constants.MESSAGE_CONTENT, message.getContent());
         startActivity(intent);
     }
 

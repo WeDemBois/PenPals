@@ -2,10 +2,13 @@ package com.github.wedemboys.penpals;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -25,17 +28,25 @@ public class ChatActivity extends Activity {
     String withUser;
     EditText chatText;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view = getLayoutInflater().inflate(R.layout.activity_chat, null);
 
-//        withUser = getIntent().getStringExtra(Constants.USER_INTENT_KEY);
-        chatText = (EditText) findViewById(R.id.chatViewChatText);
+        withUser = getIntent().getStringExtra(Constants.USER_INTENT_KEY);
+        chatText = (EditText) view.findViewById(R.id.chatViewChatText);
 //
-//        //set name in title bar
+        //set name in title bar
 //        System.out.println(findViewById(R.id.chatUserName));
-//        ((TextView) findViewById(R.id.chatUserName)).setText(withUser);
+        ((TextView) view.findViewById(R.id.chatUserName)).setText(withUser);
+
+        LinearLayout ll = (LinearLayout) view.findViewById(R.id.chatLinearLayout);
+        TextView textView = new TextView(this.getBaseContext());
+        textView.setText(getIntent().getStringExtra(Constants.MESSAGE_CONTENT));
+        textView.setTextSize(24.0f);
+        textView.setTextColor(Color.argb(255, 255, 255, 255));
+        ll.addView(textView);
 //
 //        //load previous chats
 //        File previousChats = new File(getFilesDir(), Constants.STORED_CHATS_FILE_PREFIX + withUser);
@@ -58,7 +69,7 @@ public class ChatActivity extends Activity {
         setContentView(view);
     }
 
-    public void sendChat(View view) {
+    public void sendChat(final View view) {
         String content = chatText.getText().toString();
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -74,8 +85,14 @@ public class ChatActivity extends Activity {
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
-                        if (!response.equals("success")){
-                        } else {
+                        if (response.equals("success")){
+                            LinearLayout ll = (LinearLayout) view.findViewById(R.id.chatLinearLayout);
+                            TextView textView = new TextView(ChatActivity.this.getBaseContext());
+                            String string = "You: " + getIntent().getStringExtra((Constants.MESSAGE_CONTENT));
+                            textView.setText(string);
+                            textView.setTextSize(24.0f);
+                            textView.setTextColor(Color.argb(255, 255, 255, 255));
+                            ll.addView(textView);
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -86,6 +103,12 @@ public class ChatActivity extends Activity {
         });
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
+
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(Constants.USER_INTENT_KEY, message.getRecipient());
+        intent.putExtra(Constants.MESSAGE_CONTENT, message.getContent());
+        startActivity(intent);
     }
 
     public void goToMainPage(View view) {
